@@ -1,0 +1,50 @@
+<!doctype html>
+{% extends 'main/header.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Downloads pagina</title>
+	
+
+	{% block head %}
+	<title>Downloads pagina</title>
+
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href={% static 'main/downloads.css' %}>
+    {% endblock %}
+
+</head>
+	<body>
+	{% block content %}
+
+		<div class="container">
+			{% if not mediaFiles %}
+				<h1 style="margin: 100px 0 100px 0;" class="title ifstat">Het lijkt er op dat er nog geen downloads beschikbaar zijn... Kijk later nog eens</h1>
+
+			{% else %}
+			<h1 class="toptext text-center font-weight-light">Downloads</h1>
+
+			{% endif %}
+			{% for i in mediaFiles %}
+				<div class="box row">
+					<div class="col-lg">
+						<h1 class="title font-weight-normal"><b>{{i.title}}</b></h1><br>
+						<p><b>Beschrijving: </b>{{i.text}}</p>
+						<p><b>Datum: </b>{{i.date}}</p>
+						<b>Bestand: </b><a href="http://localhost:8000/media/{{i.file}}" download>Klik om te downloaden</a>
+					</div>
+
+					<div class="row-lg">
+						<img class="img rounded mx-auto" src="http://localhost:8000/media/{{i.img}}">
+					</div>
+					
+				</div>
+
+			{% endfor %}
+		</div>
+
+
+	{% endblock %}
+
+</body>
+</html>

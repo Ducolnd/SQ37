@@ -1,0 +1,23 @@
+.table-header {
+	text-align: center;
+	padding: 40px;
+}
+
+iframe {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 200px;
+}
+
+.mainpage {
+	background-image: url("mtb winner.jpg");
+	border-radius: 5px;
+}
+
+.table {
+	opacity: 0.8;
+}
+
+.table:hover {
+	opacity: 1;
+}

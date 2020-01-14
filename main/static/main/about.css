@@ -1,0 +1,20 @@
+
+
+.top {
+	width: 200px;
+	margin: 100px 0 40px 0;
+}
+
+.box {
+	width: 100%;
+	background-color: #f4f6f9;
+	margin-bottom: 100px;
+	border-radius: 5px;
+	border: #383e44 1px solid;
+
+}
+
+.text {
+	width: 70%;
+	padding: 30px;
+}

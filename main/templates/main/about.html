@@ -1,0 +1,30 @@
+{% extends 'main/header.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+	{% load static %}
+	<title>Over mij</title>
+	<link rel="stylesheet" href={% static 'main/about.css' %}>
+    {% endblock %}
+</head>
+	<body>
+	{% block content %}
+		<div class="container">
+			<div class="top mx-auto">
+				<h1>Over mij</h1>
+			</div>
+			<div class="box">
+				<div class="text mx-auto">
+					<h4>Algemeen:</h4>
+					<p>Ik ben Duco Lindhout, de maker van deze website. Deze site is begonnen als opdracht van mijn vader, Robert. Het doel is om jullie gegevens mooi op een rijtje te zetten om te vergelijken. In de toekomst komen er misschien meer manieren om jullie gegevens te vergelijken. Normaal gesproken maak ik websites voor de lol, maar dit is mijn eerste echte (afgemaakte)
+					website. Voor vragen, opmerkingen of tips kun je mailen naar <a href="mailto:duco.lindhout@gmail.com">duco.lindhout@gmail.com.</a> Om mij te supporten kun je <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6K59G4QRVNNEN&source=url">doneren</a>, maar voel geen druk, ik heb deze site met veel plezier gemaakt! </p>
+					<h4>Technisch:</h4>
+					<p>SQ37.nl is gemaakt in Python met <a href="https://www.djangoproject.com/">Django</a> en ik maak gebruik van een sqlite database om jullie gegevens op te slaan. De website wordt bij ons thuis gehost op een Raspberry Pi. Al jullie gegevens worden opgehaald bij <a href="https://www.strava.com/">strava</a> doormiddel van hun API. In totaal heeft deze website me ongeveer 30 uur gekost. </p>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+
+</body>
+</html>

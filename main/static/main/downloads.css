@@ -1,0 +1,33 @@
+.box {
+	padding: 10px 0 30px 0;
+	/*border-radius: 5px;*/
+	background-color: #fffcfe;
+	margin: 34px 0 34px 0; 
+	border-bottom: 1px black solid;
+	/*box-shadow: 1px 5px #d9d7d8;*/
+}
+
+.container {
+	flex-wrap: wrap;
+}
+
+.img {
+	width: 400px;
+	height: auto;
+	padding-top: 30px;
+}
+
+.toptext {
+	margin: 100px;
+	padding-bottom: 30px;
+	border-bottom: 5px black solid;
+	/*box-shadow: 2px 0px red;*/
+}
+
+.title {
+	text-align: center;
+}
+
+/*.ifstat {
+	margin: 100px 0 100px 0;
+}*/

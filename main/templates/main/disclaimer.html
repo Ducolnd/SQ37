@@ -1,0 +1,34 @@
+{% extends 'main/header.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+	{% load static %}
+	<title>Over mij</title>
+	<link rel="stylesheet" href={% static 'main/about.css' %}>
+    {% endblock %}
+</head>
+	<body>
+	{% block content %}
+		<div class="container">
+			<div class="top mx-auto">
+				<h1>Disclaimer</h1>
+			</div>
+			<div class="box">
+				<div class="text mx-auto">
+					<h4>Het ergste wat kan gebeuren:</h4>
+					<p>Het ergste wat kan gebeuren is dat iemand de API gegevens en de database in handen krijgt waardoor jullie gegevens bloot liggen. </p>
+					<h4>Waarom dit niet erg is:</h4>
+					<p>Alle gegevens waar de API toegang tot heeft is sowieso te zien op strava zelf en dit zijn geen persoonlijke gegevens. Met de API <a target="_blank" href="https://developers.strava.com/docs/authentication/#detailsaboutrequestingaccess">scope</a> die je hebt gekozen kunnen ook geen gevenens gewijzigd worden, je gegevens kunnen alleen maar bekeken worden</p>
+					<h4>Hoe dit wordt voorkomen:</h4>
+					<p>Dit wordt voorkomen door een veilig systeem wat niet makkelijk doorbroken word. </p>
+					<br>
+					<br>
+					<p>Wil je dat je gegevens verwijderd worden? Dat kan heel makkelijk. Mail even naar <a href="mailto:duco.lindhout@gmail.com">duco.lindhout@gmail.com.</a> , dan zorg ik dat je gegevens worden verwijderd uit het systeem.</p>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+
+</body>
+</html>

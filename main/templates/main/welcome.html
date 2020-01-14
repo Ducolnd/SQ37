@@ -1,0 +1,84 @@
+<!doctype html>
+{% extends 'main/header.html' %}
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+	<title>SQ37.nl</title>
+	{% load static %}
+	<!-- Compiled and minified CSS -->
+	{% block head %}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href={% static 'main/welcome.css' %}>
+	{% endblock %}
+
+</head>
+
+
+<body>
+	{% block content %}
+	<div class="container" style="max-width: 1600px">
+		<div class="jumbotron" style="margin-top: 20px; background-image: url({% static 'main/stelvio.jpg' %}); background-size: cover; color: white;">
+		    <h1 class="display-4">Welkom op SQ37.nl !</h1>
+		    <p class="lead">Vind hier verschillende statistieken op een rijtje!</p>
+		    <hr class="my-4">
+		    <p>De gegevens worden 1 keer per dag opgehaald. Lijken ze oud? Klik op de knop hieronder om ze opnieuw op te halen.</p>
+		    <a class="btn btn-primary btn-lg" href="#" role="button">Herlaad gegevens</a>
+		</div>
+
+		<div class="table-responsive mainpage">
+			<h1 class="table-header">YTD Statistics</h1>
+			<table class="table table-sm table-dark table-striped">
+				<thead>
+				    <tr style="cursor: pointer;" data-toggle="collapse" data-target="#accordion3" class="clickable">
+				      	<th>Naam</th>
+				      	<th>Afstand (km)</th>
+				      	<th>Hoogte (m)</th>
+				      	<th>Tijd</th>
+				      	<th>Aantal ritten</th>
+				    </tr>
+				 </thead>
+				 <tbody class="collapse.show" id="accordion3">
+				 	{% for info in statistics %}
+						<tr>
+					      	<td>{{info.athlete}}</td>
+					      	<td>{{info.ytd_distance}}</td>
+					      	<td>{{info.ytd_elevation_gain}}</td>
+					      	<td>{{info.ytd_moving_time}}</td>
+					      	<td>{{info.ytd_count}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<h1 class="table-header">Laatste 4 weken</h1>
+			<table style="margin-bottom: 100px;" class="table table-sm table-dark table-striped">
+				<thead>
+				    <tr style="cursor: pointer;" data-toggle="collapse" data-target="#accordion4" class="clickable">
+				      	<th>Naam</th>
+				      	<th>Afstand (km)</th>
+				      	<th>Hoogte (m)</th>
+				      	<th>Tijd</th>
+				      	<th>Aantal ritten</th>
+				    </tr>
+				 </thead>
+				 <tbody class="collapse.show" id="accordion4">
+				 	{% for info in statistics %}
+						<tr>
+					      	<td>{{info.athlete}}</td>
+					      	<td>{{info.recent_distance}}</td>
+					      	<td>{{info.recent_elevation_gain}}</td>
+					      	<td>{{info.recent_moving_time}}</td>
+					      	<td>{{info.recent_count}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<iframe allowtransparency frameborder='0' height='500' scrolling='no' src='https://www.strava.com/clubs/34741/latest-rides/886443b7a51a8a47273ec93ff30cd75728f2fa3b?show_rides=true' width='60%'></iframe>
+  	{% endblock %}
+</body>
+
+</html>
