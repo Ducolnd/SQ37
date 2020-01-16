@@ -123,10 +123,6 @@ def authorize(request):
 		a2 = statistics(ied=ied, biggest_ride_distance=r2["biggest_ride_distance"], biggest_climb_elevation_gain=r2["biggest_climb_elevation_gain"], athlete=person, total_distance=ride["distance"], total_elevation_gain=ride["elevation_gain"], total_moving_time=ride["moving_time"], total_count=ride["count"], ytd_count=y["count"], ytd_distance=round(y["distance"]/1000), ytd_moving_time=y["moving_time"], ytd_elevation_gain=y["elevation_gain"], recent_elevation_gain=b["elevation_gain"], recent_distance=round(b["distance"]/1000), recent_moving_time=b["moving_time"], recent_count=b["count"])
 		a2.save()
 
-		#return HttpResponse("Access_token was new")
-
-
-	#return HttpResponse("Access_token was not new")
 	return render(request = request, template_name='main/authorize.html', context={'Users': Users.objects.all, 'statistics': statistics.objects.all})
 
 def welcome(request):
@@ -140,3 +136,9 @@ def welcome(request):
 
 def disclaimer(request):
 	return render(request = request, template_name = "main/disclaimer.html")
+
+def donated(request):
+	return render(request = request, template_name='main/donate.html') 
+
+def fail-donated(request):
+	return render(request= request, template_name='main/fail-donate.html'

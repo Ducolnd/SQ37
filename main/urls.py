@@ -11,4 +11,6 @@ urlpatterns = [
 	path("downloads/", views.downloadss, name='downloads'),
 	path("about/", views.about, name="about"),
 	path("disclaimer/", views.disclaimer, name ="disclaimer")
+	path("donated/", views.donated, name ="donated")
+	path("fail-donated/", views.fail-donated, name ="fail-donated")
 ]
