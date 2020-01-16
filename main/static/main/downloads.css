@@ -4,6 +4,7 @@
 	background-color: #fffcfe;
 	margin: 34px 0 34px 0; 
 	border-bottom: 1px black solid;
+
 	/*box-shadow: 1px 5px #d9d7d8;*/
 }
 
@@ -20,7 +21,7 @@
 .toptext {
 	margin: 100px;
 	padding-bottom: 30px;
-	border-bottom: 5px black solid;
+	border-bottom: 1px black solid;
 	/*box-shadow: 2px 0px red;*/
 }
 

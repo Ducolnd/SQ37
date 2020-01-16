@@ -7,11 +7,27 @@ from background_task import background
 import requests
 import datetime
 import time
+import math
 
 # API variables
 
 id_client = 34525
 secret_client = "ab4bd218533ac10f2527b321ea4c01dce1cfb664"
+
+def calcTime(seconds):
+	try:
+		sec = int(seconds)
+	except:
+		print("Seconds was not an int or string with only ints.")
+
+	hours = sec/3600
+	minutes = (hours%1)*60
+	
+	hours = math.floor(hours)
+	minutes = round(minutes)
+	
+	timeString = f"{hours} u {minutes} m"
+	return timeString
 
 # Change access_token if old
 def refreshToken(refresh_tokens, athlete_id):
@@ -33,7 +49,7 @@ def refreshToken(refresh_tokens, athlete_id):
 # Refresh athletes data and check wether access_token is expired
 def refreshData(refresh):
 	for user in Users.objects.all():
-		if user.expires_at - time.time() < 0:
+		if (user.expires_at - time.time()) < 0:
 			print("Creating new access_token and refreshing data for ", user.firstName)
 			refreshToken(user.refresh_token, user.ied)
 
@@ -57,12 +73,12 @@ def refreshData(refresh):
 
 				stats.ytd_count=y["count"]
 				stats.ytd_distance=round(y["distance"]/1000)
-				stats.ytd_moving_time=str(y["moving_time"])
+				stats.ytd_moving_time=calcTime(y["moving_time"])
 				stats.ytd_elevation_gain=y["elevation_gain"]
 
 				stats.recent_count=b["count"]
 				stats.recent_distance=round(b["distance"]/1000)
-				stats.recent_moving_time=str(b["moving_time"])
+				stats.recent_moving_time=calcTime(b["moving_time"])
 				stats.recent_elevation_gain=b["elevation_gain"]
 
 				stats.total_count=ride["count"]
@@ -122,7 +138,7 @@ def authorize(request):
 		a = Users(ytd_distance= round(y["distance"]/1000), access_token=access_token, firstName=firstName,secondName=secondName, profilePhoto=profilePhoto, ied=ied, athlete=athlete, refresh_token=refresh_token, expires_at=expires_at)
 		a.save()
 
-		a2 = statistics(ied=ied, biggest_ride_distance=r2["biggest_ride_distance"], biggest_climb_elevation_gain=r2["biggest_climb_elevation_gain"], athlete=person, total_distance=ride["distance"], total_elevation_gain=ride["elevation_gain"], total_moving_time=ride["moving_time"], total_count=ride["count"], ytd_count=y["count"], ytd_distance=round(y["distance"]/1000), ytd_moving_time=y["moving_time"], ytd_elevation_gain=y["elevation_gain"], recent_elevation_gain=b["elevation_gain"], recent_distance=round(b["distance"]/1000), recent_moving_time=b["moving_time"], recent_count=b["count"])
+		a2 = statistics(ied=ied, biggest_ride_distance=r2["biggest_ride_distance"], biggest_climb_elevation_gain=r2["biggest_climb_elevation_gain"], athlete=person, total_distance=ride["distance"], total_elevation_gain=ride["elevation_gain"], total_moving_time=ride["moving_time"], total_count=ride["count"], ytd_count=y["count"], ytd_distance=round(y["distance"]/1000), ytd_moving_time=calcTime(y["moving_time"]), ytd_elevation_gain=y["elevation_gain"], recent_elevation_gain=b["elevation_gain"], recent_distance=round(b["distance"]/1000), recent_moving_time=calcTimeb(["moving_time"]), recent_count=b["count"])
 		a2.save()
 
 	return render(request = request, template_name='main/authorize.html', context={'Users': Users.objects.all, 'statistics': statistics.objects.all})
@@ -142,5 +158,5 @@ def disclaimer(request):
 def donated(request):
 	return render(request = request, template_name='main/donate.html') 
 
-def fail-donated(request):
-	return render(request= request, template_name='main/fail-donate.html'
+def failDonated(request):
+	return render(request= request, template_name='main/fail-donate.html')
