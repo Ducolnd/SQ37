@@ -31,16 +31,17 @@ def refreshToken(refresh_tokens, athlete_id):
 	print("Changed %s 's access_token to %s" % (user.firstName, user.access_token))
 
 # Refresh athletes data and check wether access_token is expired
-def refreshData():
+def refreshData(refresh):
 	for user in Users.objects.all():
 		if user.expires_at - time.time() < 0:
 			print("Creating new access_token and refreshing data for ", user.firstName)
 			refreshToken(user.refresh_token, user.ied)
 
-	for user in Users.objects.all():
-		# print(user.access_token)
 
-		if user.expires_at - time.time() < 0:
+
+	if refresh:
+		for user in Users.objects.all():
+			print(user.access_token)
 
 			stats = statistics.objects.get(ied=user.ied)
 			r = requests.get("https://www.strava.com/api/v3/athletes/" + user.ied + "/stats?access_token=" + user.access_token + "&per_page=1000")
@@ -124,15 +125,22 @@ def authorize(request):
 		a2 = statistics(ied=ied, biggest_ride_distance=r2["biggest_ride_distance"], biggest_climb_elevation_gain=r2["biggest_climb_elevation_gain"], athlete=person, total_distance=ride["distance"], total_elevation_gain=ride["elevation_gain"], total_moving_time=ride["moving_time"], total_count=ride["count"], ytd_count=y["count"], ytd_distance=round(y["distance"]/1000), ytd_moving_time=y["moving_time"], ytd_elevation_gain=y["elevation_gain"], recent_elevation_gain=b["elevation_gain"], recent_distance=round(b["distance"]/1000), recent_moving_time=b["moving_time"], recent_count=b["count"])
 		a2.save()
 
-		#return HttpResponse("Access_token was new")
-
-
-	#return HttpResponse("Access_token was not new")
 	return render(request = request, template_name='main/authorize.html', context={'Users': Users.objects.all, 'statistics': statistics.objects.all})
 
 def welcome(request):
-	refreshData()
+	query = request.GET.get("refresh")
+	if query:
+		refreshData(True)
+	else:
+		refreshData(False)
+
 	return render(request= request, template_name='main/welcome.html', context={'Users': Users.objects.all, 'statistics': statistics.objects.all})
 
 def disclaimer(request):
 	return render(request = request, template_name = "main/disclaimer.html")
+
+def donated(request):
+	return render(request = request, template_name='main/donate.html') 
+
+def fail-donated(request):
+	return render(request= request, template_name='main/fail-donate.html'
