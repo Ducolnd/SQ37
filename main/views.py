@@ -38,41 +38,43 @@ def refreshData():
 			refreshToken(user.refresh_token, user.ied)
 
 	for user in Users.objects.all():
-		print(user.access_token)
+		# print(user.access_token)
 
-		stats = statistics.objects.get(ied=user.ied)
-		r = requests.get("https://www.strava.com/api/v3/athletes/" + user.ied + "/stats?access_token=" + user.access_token + "&per_page=1000")
-		data = r.json()
+		if user.expires_at - time.time() < 0:
 
-		try:
-			ride = data["all_ride_totals"]
-			y = data["ytd_ride_totals"]
-			b = data["recent_ride_totals"]
+			stats = statistics.objects.get(ied=user.ied)
+			r = requests.get("https://www.strava.com/api/v3/athletes/" + user.ied + "/stats?access_token=" + user.access_token + "&per_page=1000")
+			data = r.json()
 
-			stats.biggest_ride_distance=data["biggest_ride_distance"]
-			stats.biggest_climb_elevation_gain=data['biggest_climb_elevation_gain']
+			try:
+				ride = data["all_ride_totals"]
+				y = data["ytd_ride_totals"]
+				b = data["recent_ride_totals"]
 
-			stats.ytd_count=y["count"]
-			stats.ytd_distance=round(y["distance"]/1000)
-			stats.ytd_moving_time=str(y["moving_time"])
-			stats.ytd_elevation_gain=y["elevation_gain"]
+				stats.biggest_ride_distance=data["biggest_ride_distance"]
+				stats.biggest_climb_elevation_gain=data['biggest_climb_elevation_gain']
 
-			stats.recent_count=b["count"]
-			stats.recent_distance=round(b["distance"]/1000)
-			stats.recent_moving_time=str(b["moving_time"])
-			stats.recent_elevation_gain=b["elevation_gain"]
+				stats.ytd_count=y["count"]
+				stats.ytd_distance=round(y["distance"]/1000)
+				stats.ytd_moving_time=str(y["moving_time"])
+				stats.ytd_elevation_gain=y["elevation_gain"]
 
-			stats.total_count=ride["count"]
-			stats.total_distance=ride["distance"]
-			stats.total_moving_time=ride["moving_time"]
-			stats.total_elevation_gain=ride["elevation_gain"]
+				stats.recent_count=b["count"]
+				stats.recent_distance=round(b["distance"]/1000)
+				stats.recent_moving_time=str(b["moving_time"])
+				stats.recent_elevation_gain=b["elevation_gain"]
 
-			stats.save()
+				stats.total_count=ride["count"]
+				stats.total_distance=ride["distance"]
+				stats.total_moving_time=ride["moving_time"]
+				stats.total_elevation_gain=ride["elevation_gain"]
 
-			print("Reloaded %s 's stats. Time %s" % (user.firstName, datetime.datetime.now()))
-		except KeyError:
-			print("did not work, KeyError, printing data")
-			print(data)
+				stats.save()
+
+				print("Reloaded %s 's stats. Time %s" % (user.firstName, datetime.datetime.now()))
+			except KeyError:
+				print("did not work, KeyError, printing data")
+				print(data)
 
 @background(schedule=2)
 def refresh():

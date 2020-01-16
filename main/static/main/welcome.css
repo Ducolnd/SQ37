@@ -5,12 +5,17 @@
 
 iframe {
 	display: block;
-	margin: 0 auto;
-	margin-bottom: 200px;
+	margin: 50px auto;
+	/*margin-bottom: 200px;*/
 }
 
+.boldness {
+	font-weight: 30px;
+}
+
+
 .mainpage {
-	background-image: url("mtb winner.jpg");
+	/*background-image: url("mtb winner.jpg");*/
 	border-radius: 5px;
 }
 
@@ -21,3 +26,7 @@ iframe {
 .table:hover {
 	opacity: 1;
 }
+
+/*th {
+	float: right;
+}*/
