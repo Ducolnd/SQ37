@@ -1,0 +1,8 @@
+footer a {
+	color: gray;
+}
+
+footer a:hover {
+	color: lightgray;
+	text-decoration: none;
+}

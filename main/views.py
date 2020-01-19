@@ -2,7 +2,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Users, statistics, removeMe, mediaFiles
-from background_task import background
 
 import requests
 import datetime
@@ -92,11 +91,6 @@ def refreshData(refresh):
 			except KeyError:
 				print("did not work, KeyError, printing data")
 				print(data)
-
-@background(schedule=2)
-def refresh():
-	t = removeMe.objects.latest('id').id
-	removeMe(name="Duco"+str(t)).save()
 
 def reload(request):
 	return HttpResponse("<h1>reload</h1>")
