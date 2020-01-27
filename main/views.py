@@ -54,7 +54,7 @@ def refreshData(refresh):
 
 
 
-	if refresh:
+	if refresh: #If refresh=True in URL as query parameter
 		for user in Users.objects.all():
 			print(user.access_token)
 
@@ -85,7 +85,10 @@ def refreshData(refresh):
 				stats.total_moving_time=ride["moving_time"]
 				stats.total_elevation_gain=ride["elevation_gain"]
 
+				user.ytd_distance = round(y["distance"]/1000)
+
 				stats.save()
+				user.save() #Save changed made to both databases
 
 				print("Reloaded %s 's stats. Time %s" % (user.firstName, datetime.datetime.now()))
 			except KeyError:
