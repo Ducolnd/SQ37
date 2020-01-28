@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link" href="/authorize">Gebruikers</a>
-            <a class="nav-item nav-link" href="https://www.strava.com/oauth/authorize?client_id=34525&response_type=code&redirect_uri=http://sq37.nl/authorize/&approval_prompt=force&scope=profile:read_all">Registreren</a>
+            <a class="nav-item nav-link" href="https://www.strava.com/oauth/authorize?client_id=34525&response_type=code&redirect_uri=http://{{ request.get_host }}/authorize/&approval_prompt=force&scope=profile:read_all">Registreren</a>
             <a class="nav-item nav-link" href="/">Statistieken</a>
             <a class="nav-item nav-link" href="/downloads">Downloads</a>
             <a class="nav-item nav-link" href="/about">Over mij</a>
@@ -69,7 +69,7 @@
             <ul class="list-unstyled">
                 <li><a href="/">Home</a></li>
                 <li><a href="/authorize">Gebruikers</a></li>
-                <li><a href="https://www.strava.com/oauth/authorize?client_id=34525&response_type=code&redirect_uri=http://127.0.0.1:8000/authorize/&approval_prompt=force&scope=view_private">Registreren</a></li>
+                <li><a href="https://www.strava.com/oauth/authorize?client_id=34525&response_type=code&redirect_uri=http://{{ request.get_host }}/authorize/&approval_prompt=force&scope=profile:read_all">Registreren</a></li>
                 <li><a href="/">Statistieken</a></li>
                 <li><a href="/downloads">Downloads</a></li>
             </ul>

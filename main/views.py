@@ -14,12 +14,9 @@ id_client = 34525
 secret_client = "ab4bd218533ac10f2527b321ea4c01dce1cfb664"
 
 def calcTime(seconds):
-	try:
-		sec = int(seconds)
-	except:
-		print("Seconds was not an int or string with only ints.")
+	sec = int(seconds)
 
-	hours = sec/3600
+	hours = int(sec)/3600
 	minutes = (hours%1)*60
 	
 	hours = math.floor(hours)
@@ -56,8 +53,6 @@ def refreshData(refresh):
 
 	if refresh: #If refresh=True in URL as query parameter
 		for user in Users.objects.all():
-			print(user.access_token)
-
 			stats = statistics.objects.get(ied=user.ied)
 			r = requests.get("https://www.strava.com/api/v3/athletes/" + user.ied + "/stats?access_token=" + user.access_token + "&per_page=1000")
 			data = r.json()
@@ -135,7 +130,7 @@ def authorize(request):
 		a = Users(ytd_distance= round(y["distance"]/1000), access_token=access_token, firstName=firstName,secondName=secondName, profilePhoto=profilePhoto, ied=ied, athlete=athlete, refresh_token=refresh_token, expires_at=expires_at)
 		a.save()
 
-		a2 = statistics(ied=ied, biggest_ride_distance=r2["biggest_ride_distance"], biggest_climb_elevation_gain=r2["biggest_climb_elevation_gain"], athlete=person, total_distance=ride["distance"], total_elevation_gain=ride["elevation_gain"], total_moving_time=ride["moving_time"], total_count=ride["count"], ytd_count=y["count"], ytd_distance=round(y["distance"]/1000), ytd_moving_time=calcTime(y["moving_time"]), ytd_elevation_gain=y["elevation_gain"], recent_elevation_gain=b["elevation_gain"], recent_distance=round(b["distance"]/1000), recent_moving_time=calcTimeb(["moving_time"]), recent_count=b["count"])
+		a2 = statistics(ied=ied, biggest_ride_distance=r2["biggest_ride_distance"], biggest_climb_elevation_gain=r2["biggest_climb_elevation_gain"], athlete=person, total_distance=ride["distance"], total_elevation_gain=ride["elevation_gain"], total_moving_time=ride["moving_time"], total_count=ride["count"], ytd_count=y["count"], ytd_distance=round(y["distance"]/1000), ytd_moving_time=calcTime(y["moving_time"]), ytd_elevation_gain=y["elevation_gain"], recent_elevation_gain=b["elevation_gain"], recent_distance=round(b["distance"]/1000), recent_moving_time=calcTime(b["moving_time"]), recent_count=b["count"])
 		a2.save()
 
 	return render(request = request, template_name='main/authorize.html', context={'Users': Users.objects.all, 'statistics': statistics.objects.all})
