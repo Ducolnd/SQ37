@@ -7,11 +7,12 @@ import requests
 import datetime
 import time
 import math
+import os #For environment variables
 
 # API variables
 
 id_client = 34525
-secret_client = "ab4bd218533ac10f2527b321ea4c01dce1cfb664"
+client_secret = os.environ["client_secret"]
 
 def calcTime(seconds):
 	sec = int(seconds)
@@ -27,7 +28,7 @@ def calcTime(seconds):
 
 # Change access_token if old
 def refreshToken(refresh_tokens, athlete_id):
-	r = requests.post(url = "https://www.strava.com/oauth/token", params = {"client_id" : id_client, "client_secret" : secret_client, "refresh_token" : refresh_tokens, "grant_type" : "refresh_token"})
+	r = requests.post(url = "https://www.strava.com/oauth/token", params = {"client_id" : id_client, "client_secret" : client_secret, "refresh_token" : refresh_tokens, "grant_type" : "refresh_token"})
 	data = r.json()
 	print(data)
 
@@ -109,7 +110,7 @@ def authorize(request):
 	if query == None:
 		return render(request = request, template_name='main/authorize.html', context={'Users': Users.objects.all, 'statistics': statistics.objects.all})
 
-	r = requests.post(url = "https://www.strava.com/oauth/token", params = {"client_id" : id_client, "client_secret" : secret_client, "grant_type" : "authorization_code", "code" : query}).json()
+	r = requests.post(url = "https://www.strava.com/oauth/token", params = {"client_id" : id_client, "client_secret" : client_secret, "grant_type" : "authorization_code", "code" : query}).json()
 
 	if not Users.objects.filter(access_token=r['access_token']).exists() or not Users.objects.filter(ied=r['athlete']['id']).exists():
 		access_token = r['access_token']
