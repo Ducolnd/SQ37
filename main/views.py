@@ -11,7 +11,7 @@ import os #For environment variables
 
 # API variables
 id_client = 34525
-client_secret = os.environ["client_secret"]
+client_secret = "ab4bd218533ac10f2527b321ea4c01dce1cfb664"
 
 def calcTime(seconds):
 	sec = int(seconds)
