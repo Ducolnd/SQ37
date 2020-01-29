@@ -10,7 +10,6 @@ import math
 import os #For environment variables
 
 # API variables
-
 id_client = 34525
 client_secret = os.environ["client_secret"]
 
