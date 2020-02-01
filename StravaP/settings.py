@@ -22,16 +22,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2iyik4=qkcxi9zf_b#iu+ntf+o1jd2zzc!9&j3=82bt#ns)zo+'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
+# Security settings
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# BASE_URL = "https://www.sq37.nl"
+# PREPEND_WWW = True
 
 ALLOWED_HOSTS = ['sq37.nl', 'www.sq37.nl', '192.168.178.133', '192.168.178.142', '127.0.0.1', 'localhost']
 
-# Security settings
-# SECURE_SSL_REDIRECT = False
 
 # Application definition
-
 INSTALLED_APPS = [
     'main.apps.MainConfig',
     'django.contrib.admin',
@@ -74,8 +79,6 @@ WSGI_APPLICATION = 'StravaP.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -85,8 +88,6 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -104,8 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -118,8 +117,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
