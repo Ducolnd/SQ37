@@ -1,13 +1,12 @@
 # Modules needed for this to work:
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Users, statistics, removeMe, mediaFiles
+from .models import Users, statistics, mediaFiles
 
 import requests
 import datetime
 import time
 import math
-import os #For environment variables
 
 # API variables
 id_client = 34525
@@ -101,12 +100,12 @@ def about(request):
 
 
 def authorize(request):
-	query = request.GET.get('code')
-	query2 = request.GET.get('error')
-	if query2 == 'access_denied':
-		return HttpResponse('Je hebt geen toegang gegeven dus kun je niet deze website gebruiken.')
+	codeQ = request.GET.get('code')
+	errorQ = request.GET.get('error')
+	if errorQ == 'access_denied':
+		return HttpResponse('<h1>Je hebt geen toegang gegeven dus kun je niet deze website gebruiken.</h1>')
 
-	if query == None:
+	if codeQ == None:
 		return render(request = request, template_name='main/authorize.html', context={'Users': Users.objects.all, 'statistics': statistics.objects.all})
 
 	r = requests.post(url = "https://www.strava.com/oauth/token", params = {"client_id" : id_client, "client_secret" : client_secret, "grant_type" : "authorization_code", "code" : query}).json()

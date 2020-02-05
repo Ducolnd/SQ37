@@ -44,9 +44,6 @@ class statistics(models.Model):
 	def __int__(self):
 		return self.athlete
 
-class removeMe(models.Model):
-	name = models.CharField('name', max_length=200, default="geen")
-
 class mediaFiles(models.Model):
 	title = models.CharField('title', max_length=100, default="Geen titel benoemd")
 	text = models.TextField('text', default="Geen beschrijving benoemd")
