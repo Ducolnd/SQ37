@@ -1,4 +1,3 @@
 # SQ37
 
-Repository voor SQ37 website.
-Fork als je wil.
+Repository for SQ37 website.
